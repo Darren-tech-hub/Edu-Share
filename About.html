@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Edu Share | Revolutionizing Education in Uganda</title>
+    <meta name="description" content="Meet the team behind Uganda's #1 educational technology platform. Learn about our mission, vision, and impact on 25,000+ students.">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* ===== ROOT VARIABLES ===== */
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a0ca3;
+            --secondary: #7209b7;
+            --accent: #4cc9f0;
+            --success: #06d6a0;
+            --warning: #ffd166;
+            --danger: #ef476f;
+            --dark: #1a1a2e;
+            --dark-light: #16213e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --gradient-primary: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+            --gradient-accent: linear-gradient(135deg, #4cc9f0 0%, #4361ee 100%);
+            --gradient-success: linear-gradient(135deg, #06d6a0 0%, #118ab2 100%);
+            --gradient-warning: linear-gradient(135deg, #ffd166 0%, #f4a261 100%);
+            --gradient-dark: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.2);
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        h1 { font-size: 3.8rem; margin-bottom: 1.5rem; line-height: 1.2; font-weight: 800; }
+        h2 { font-size: 2.8rem; margin-bottom: 1rem; font-weight: 700; }
+        h3 { font-size: 1.8rem; margin-bottom: 1rem; font-weight: 600; }
+        .text-gradient { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .btn-primary { background: var(--gradient-primary); color: white; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+        .btn-outline:hover { background: var(--primary); color: white; }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .navbar.scrolled { padding: 0.8rem 0; background: rgba(255, 255, 255, 0.98); }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 15px; text-decoration: none; }
+        .logo-icon {
+            width: 45px; height: 45px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 22px;
+        }
+        .logo-text h2 { font-size: 1.5rem; margin: 0; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .logo-text span { font-size: 0.8rem; color: var(--gray); display: block; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+        }
+        .nav-links a:hover::after { width: 100%; }
+        .menu-toggle { display: none; flex-direction: column; gap: 4px; cursor: pointer; }
+        .menu-toggle span { width: 25px; height: 3px; background: var(--primary); border-radius: 2px; }
+
+        /* ===== DASHBOARD SIDEBAR ===== */
+        .dashboard-sidebar {
+            position: fixed;
+            left: -320px;
+            top: 0;
+            width: 320px;
+            height: 100vh;
+            background: var(--gradient-dark);
+            z-index: 2000;
+            transition: left 0.4s ease;
+            box-shadow: var(--shadow-lg);
+            overflow-y: auto;
+        }
+        .dashboard-sidebar.open { left: 0; }
+        .dashboard-toggle {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--gradient-primary);
+            color: white;
+            width: 45px;
+            height: 80px;
+            border-radius: 0 25px 25px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2001;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+        }
+        .dashboard-toggle:hover { width: 55px; }
+        .dashboard-toggle i { transition: transform 0.3s; }
+        .dashboard-sidebar.open ~ .dashboard-toggle i { transform: rotate(180deg); }
+        .sidebar-header {
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .sidebar-avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 2.5rem;
+            color: white;
+        }
+        .sidebar-header h3 { color: white; margin-bottom: 5px; }
+        .sidebar-header p { color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+        .sidebar-menu { padding: 20px; }
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            color: white;
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            margin-bottom: 10px;
+        }
+        .sidebar-item:hover { background: rgba(255,255,255,0.1); transform: translateX(5px); }
+        .sidebar-item i { width: 25px; font-size: 1.2rem; }
+        .sidebar-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 20px 0;
+        }
+
+        /* ===== ABOUT HERO ===== */
+        .about-hero {
+            padding-top: 120px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-content { text-align: center; max-width: 900px; margin: 0 auto; }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 10px 25px;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            transition: var(--transition);
+        }
+        .stat-card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.2); }
+        .stat-number { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+
+        /* ===== FOUNDER SECTION ===== */
+        .founder-section { background: white; }
+        .founder-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .founder-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            position: relative;
+        }
+        .founder-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        }
+        .founder-avatar {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+        }
+        .founder-quote {
+            background: linear-gradient(135deg, rgba(67,97,238,0.1) 0%, rgba(76,201,240,0.1) 100%);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            margin-top: 1.5rem;
+            font-style: italic;
+        }
+
+        /* ===== MISSION CARDS ===== */
+        .mission-section { background: var(--gradient-dark); color: white; }
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .mission-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            transition: var(--transition);
+        }
+        .mission-card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.2); }
+        .mission-card i { font-size: 3rem; margin-bottom: 1rem; }
+
+        /* ===== VALUES SECTION ===== */
+        .values-section { background: white; }
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .value-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: var(--transition);
+            border-bottom: 4px solid transparent;
+        }
+        .value-card:hover { transform: translateY(-10px); border-bottom-color: var(--primary); }
+        .value-card i { font-size: 3rem; color: var(--primary); margin-bottom: 1rem; }
+
+        /* ===== TIMELINE ===== */
+        .timeline-section { background: #f8f9fa; }
+        .timeline-container { max-width: 800px; margin: 0 auto; position: relative; }
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: var(--gradient-primary);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+        .timeline-item:nth-child(odd) .timeline-content { margin-left: auto; }
+        .timeline-content {
+            width: 45%;
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+        .timeline-item:nth-child(odd) .timeline-content { margin-right: 55%; }
+        .timeline-item:nth-child(even) .timeline-content { margin-left: 55%; }
+        .timeline-year {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        /* ===== TEAM SECTION ===== */
+        .team-section { background: white; }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .team-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: var(--transition);
+        }
+        .team-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+        .team-avatar {
+            width: 100%;
+            height: 250px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+        }
+        .team-info { padding: 1.5rem; }
+
+        /* ===== COMPARISON TABLE ===== */
+        .comparison-section { background: #f8f9fa; }
+        .comparison-table {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .comparison-table th { background: var(--gradient-primary); color: white; }
+        .comparison-table tr:hover { background: #f8f9fa; }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials-section { background: var(--gradient-dark); color: white; }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .testimonial-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .testimonial-card i { font-size: 2rem; color: var(--accent); margin-bottom: 1rem; }
+
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            background: var(--gradient-primary);
+            text-align: center;
+            padding: 80px 20px;
+            border-radius: var(--radius-lg);
+            margin: 50px 20px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a { color: #adb5bd; text-decoration: none; transition: var(--transition); }
+        .footer-links a:hover { color: white; transform: translateX(5px); display: inline-block; }
+
+        /* ===== BACK TO TOP ===== */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: none;
+            z-index: 999;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .founder-container { grid-template-columns: 1fr; }
+            .mission-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .timeline-container::before { left: 30px; }
+            .timeline-content { width: calc(100% - 80px); margin-left: 80px !important; }
+            .timeline-item:nth-child(odd) .timeline-content { margin-right: 0; }
+            .timeline-year { left: 30px; transform: translateX(0); }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 1rem; box-shadow: var(--shadow-md); }
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: flex; }
+            .stats-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dashboard Sidebar -->
+    <div class="dashboard-sidebar" id="dashboardSidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-avatar"><i class="fas fa-user-graduate"></i></div>
+            <h3>Guest User</h3>
+            <p>Free Trial Active • 29 days left</p>
+        </div>
+        <div class="sidebar-menu">
+            <a href="#" class="sidebar-item"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+            <a href="#" class="sidebar-item"><i class="fas fa-book-open"></i><span>My Learning</span></a>
+            <a href="#" class="sidebar-item"><i class="fas fa-download"></i><span>Offline Vault</span></a>
+            <a href="#" class="sidebar-item"><i class="fas fa-chart-line"></i><span>Progress Tracker</span></a>
+            <a href="#" class="sidebar-item"><i class="fas fa-robot"></i><span>AI Tutor</span></a>
+            <div class="sidebar-divider"></div>
+            <a href="#" class="sidebar-item"><i class="fas fa-crown"></i><span>Upgrade to Premium</span></a>
+            <a href="#" class="sidebar-item"><i class="fas fa-user-edit"></i><span>Profile Settings</span></a>
+            <a href="#" class="sidebar-item"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+        </div>
+    </div>
+    <div class="dashboard-toggle" id="dashboardToggle">
+        <i class="fas fa-chevron-right"></i>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
+                <div class="logo-text">
+                    <h2>Edu Share</h2>
+                    <span>AI-Powered Education</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="blogs.html">Blog & Gallery</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="hero-content" data-aos="fade-up">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i> Revolutionizing Education Since 2024
+                </div>
+                <h1>We're Building Africa's<br><span class="text-gradient">Smartest Learning Platform</span></h1>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">From a simple idea to serving 25,000+ students. We're on a mission to democratize quality education through technology and AI.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="stat-number" data-count="25000">0</div>
+                        <div>Students Impacted</div>
+                    </div>
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="stat-number" data-count="1500">0</div>
+                        <div>Free Resources</div>
+                    </div>
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="stat-number" data-count="98">0%</div>
+                        <div>Success Rate</div>
+                    </div>
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="stat-number" data-count="50">0+</div>
+                        <div>Partner Schools</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder Section -->
+    <section class="founder-section">
+        <div class="container">
+            <div class="founder-container">
+                <div data-aos="fade-right">
+                    <div class="founder-card">
+                        <div class="founder-avatar">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h2>Alimpa Darren</h2>
+                        <p style="color: var(--primary); font-weight: 600; margin-bottom: 1rem;">Founder & CEO</p>
+                        <p>Visionary educator and technologist passionate about transforming Uganda's education landscape through innovative solutions.</p>
+                        <div class="founder-quote">
+                            <i class="fas fa-quote-left" style="color: var(--primary); font-size: 1.2rem;"></i>
+                            <span>"Technology alone won't change education, but technology in the hands of passionate educators will transform our continent."</span>
+                        </div>
+                    </div>
+                </div>
+                <div data-aos="fade-left">
+                    <h2>The Vision Behind<br>Our Revolution</h2>
+                    <p style="margin-bottom: 1.5rem; color: var(--gray);">While studying the challenges faced by Ugandan students, Alimpa Darren noticed a critical gap: quality educational resources were either too expensive or completely inaccessible to most students.</p>
+                    <p style="margin-bottom: 1.5rem; color: var(--gray);">This realization sparked a mission to create a platform that would democratize education through technology. What started as a simple document sharing website has evolved into Uganda's first AI-powered learning ecosystem.</p>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem;">
+                        <div style="background: var(--gradient-primary); color: white; padding: 1rem; border-radius: var(--radius-md); text-align: center;">
+                            <i class="fas fa-graduation-cap" style="font-size: 1.5rem;"></i>
+                            <div>Education Expert</div>
+                        </div>
+                        <div style="background: var(--gradient-accent); color: white; padding: 1rem; border-radius: var(--radius-md); text-align: center;">
+                            <i class="fas fa-laptop-code" style="font-size: 1.5rem;"></i>
+                            <div>Tech Innovator</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Our Core Purpose</h2>
+            <div class="mission-grid">
+                <div class="mission-card" data-aos="flip-left">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>Our Mission</h3>
+                    <p>To provide every Ugandan student with free, high-quality educational resources and AI-powered learning tools that democratize access to education.</p>
+                </div>
+                <div class="mission-card" data-aos="flip-left" data-aos-delay="100">
+                    <i class="fas fa-eye"></i>
+                    <h3>Our Vision</h3>
+                    <p>To become Africa's leading educational technology platform, transforming how 10 million students learn by 2030.</p>
+                </div>
+                <div class="mission-card" data-aos="flip-left" data-aos-delay="200">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Our Promise</h3>
+                    <p>We commit to keeping all core educational resources 100% free forever and continuously innovating for Ugandan students.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Our Guiding Principles</h2>
+            <div class="values-grid">
+                <div class="value-card" data-aos="zoom-in">
+                    <i class="fas fa-users"></i>
+                    <h3>Inclusivity</h3>
+                    <p>Every student deserves quality education, regardless of background, location, or financial status.</p>
+                </div>
+                <div class="value-card" data-aos="zoom-in" data-aos-delay="100">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Innovation</h3>
+                    <p>Constantly exploring cutting-edge technologies to create smarter, more effective learning experiences.</p>
+                </div>
+                <div class="value-card" data-aos="zoom-in" data-aos-delay="200">
+                    <i class="fas fa-heart"></i>
+                    <h3>Passion</h3>
+                    <p>Driven by genuine love for education and belief in every student's potential to succeed.</p>
+                </div>
+                <div class="value-card" data-aos="zoom-in" data-aos-delay="300">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Excellence</h3>
+                    <p>Committed to maintaining the highest quality standards in all our resources and services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Our Journey So Far</h2>
+            <div class="timeline-container">
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-year">2024</div>
+                    <div class="timeline-content">
+                        <h3>The Beginning</h3>
+                        <p>Started with 500 free resources and a vision to democratize education. Reached 1,000 students in the first month.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-left">
+                    <div class="timeline-year">2025</div>
+                    <div class="timeline-content">
+                        <h3>AI Integration</h3>
+                        <p>Launched AI-powered features including personalized learning paths and smart recommendations. User base grew to 10,000+ students.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-year">2026</div>
+                    <div class="timeline-content">
+                        <h3>National Expansion</h3>
+                        <p>Partnered with 50+ schools across Uganda. Introduced mobile app and offline access capabilities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Meet The Dream Team</h2>
+            <div class="team-grid">
+                <div class="team-card" data-aos="flip-left">
+                    <div class="team-avatar"><i class="fas fa-user-tie"></i></div>
+                    <div class="team-info">
+                        <h3>Alimpa Darren</h3>
+                        <p style="color: var(--primary);">Founder & CEO</p>
+                        <p>Visionary leader passionate about edtech innovation in Africa.</p>
+                    </div>
+                </div>
+                <div class="team-card" data-aos="flip-left" data-aos-delay="100">
+                    <div class="team-avatar"><i class="fas fa-laptop-code"></i></div>
+                    <div class="team-info">
+                        <h3>Tech Team</h3>
+                        <p style="color: var(--primary);">Developers & Engineers</p>
+                        <p>Building Africa's most advanced educational platform.</p>
+                    </div>
+                </div>
+                <div class="team-card" data-aos="flip-left" data-aos-delay="200">
+                    <div class="team-avatar"><i class="fas fa-chalkboard-user"></i></div>
+                    <div class="team-info">
+                        <h3>Education Team</h3>
+                        <p style="color: var(--primary);">Curriculum Experts</p>
+                        <p>Ensuring all resources meet national curriculum standards.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Why Choose Edu Share?</h2>
+            <div class="comparison-table" data-aos="fade-up">
+                <table>
+                    <thead>
+                        <tr><th>Feature</th><th>Edu Share</th><th>WhatsApp Groups</th><th>Tutoring Centers</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>UNEB Past Papers</td><td>✅ 1,500+</td><td>❌ Disorganized</td><td>✅ Limited</td></tr>
+                        <tr><td>AI Tutor 24/7</td><td>✅ Yes</td><td>❌ No</td><td>❌ No</td></tr>
+                        <tr><td>Offline Access</td><td>✅ Yes</td><td>✅ Partial</td><td>❌ No</td></tr>
+                        <tr><td>Monthly Cost</td><td><strong>15,000 UGX</strong></td><td>Data only</td><td>100,000+ UGX</td></tr>
+                        <tr><td>Progress Tracking</td><td>✅ Yes</td><td>❌ No</td><td>✅ Limited</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">What Our Community Says</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card" data-aos="fade-up">
+                    <i class="fas fa-quote-left"></i>
+                    <p>"The past papers with answers helped me improve from a C to an A in Mathematics! Best platform for Ugandan students."</p>
+                    <h4>Sarah N.</h4>
+                    <p>P7 Student, Kampala</p>
+                </div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-quote-left"></i>
+                    <p>"Finally a platform that understands the Ugandan curriculum. The AI tutor is a game changer for my revision."</p>
+                    <h4>John M.</h4>
+                    <p>S4 Student, Jinja</p>
+                </div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-quote-left"></i>
+                    <p>"My daughter's performance has improved significantly since using Edu Share. Highly recommended for parents!"</p>
+                    <h4>Grace A.</h4>
+                    <p>Parent, Mbale</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container" data-aos="zoom-in">
+            <h2 style="color: white;">Ready to Join Our<br>Educational Revolution?</h2>
+            <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem; max-width: 700px; margin: 1rem auto 2rem;">Whether you're a student, teacher, or supporter, there's a place for you in our mission to transform education in Uganda.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="index.html" class="btn btn-white"><i class="fas fa-rocket"></i> Start Learning Free</a>
+                <a href="#" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-handshake"></i> Partner With Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>Edu Share</h4>
+                    <p>Empowering Uganda's future through innovative educational technology and AI-powered learning solutions.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="blogs.html">Blog & Gallery</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Past Papers</a></li>
+                        <li><a href="#">Revision Notes</a></li>
+                        <li><a href="#">Video Lessons</a></li>
+                        <li><a href="#">AI Tutor</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:alimpadarren@gmail.com"><i class="fas fa-envelope"></i> alimpadarren@gmail.com</a></li>
+                        <li><a href="tel:+256746815961"><i class="fas fa-phone"></i> +256 746 815 961</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> Kampala, Uganda</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom" style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>&copy; <span id="currentYear"></span> Edu Share. All rights reserved. | Empowering Uganda's Future</p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({ duration: 1000, once: true, offset: 100 });
+
+        // Mobile Menu
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.querySelector('.nav-links');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+            });
+        }
+
+        // Navbar Scroll
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+        });
+
+        // Dashboard Sidebar
+        const dashboardSidebar = document.getElementById('dashboardSidebar');
+        const dashboardToggle = document.getElementById('dashboardToggle');
+        if (dashboardToggle) {
+            dashboardToggle.addEventListener('click', () => {
+                dashboardSidebar.classList.toggle('open');
+            });
+            document.addEventListener('click', (e) => {
+                if (dashboardSidebar && dashboardToggle && !dashboardSidebar.contains(e.target) && !dashboardToggle.contains(e.target) && dashboardSidebar.classList.contains('open')) {
+                    dashboardSidebar.classList.remove('open');
+                }
+            });
+        }
+
+        // Counter Animation
+        function animateCounter(el, target) {
+            let current = 0;
+            const suffix = target.toString().includes('%') ? '%' : '';
+            const cleanTarget = parseInt(target);
+            const increment = cleanTarget / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= cleanTarget) {
+                    el.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    el.textContent = Math.floor(current) + suffix;
+                }
+            }, 30);
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.stat-number').forEach(stat => {
+                        const target = stat.getAttribute('data-count');
+                        animateCounter(stat, target);
+                    });
+                    observer.disconnect();
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        const statsSection = document.querySelector('.stats-grid');
+        if (statsSection) observer.observe(statsSection);
+
+        // Back to Top
+        const backBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (backBtn) backBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+        });
+        if (backBtn) {
+            backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        }
+
+        // Current Year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

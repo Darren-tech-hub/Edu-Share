@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edu Share - Autorize</title>
+<style>
+:root {
+  --primary: #00ffff;
+  --secondary: #ff00ff;
+  --bg: #0a0a1a;
+  --card: #1a1a3a;
+  --input: #2a2a4a;
+  --text: #ffffff;
+  --muted: #adb5bd;
+  --error: #ff0044;
+  --success: #00ff88;
+  --radius: 16px;
+  --gradient: linear-gradient(135deg, #00ffff 0%, #ff00ff 100%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', Arial, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 420px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.tabs {
+  display: flex;
+  background: var(--input);
+}
+
+.tab {
+  flex: 1;
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--muted);
+  transition: 0.3s;
+  border: none;
+  background: transparent;
+}
+
+.tab.active {
+  background: var(--gradient);
+  color: #000;
+}
+
+.form-container {
+  padding: 35px 30px;
+}
+
+.form {
+  display: none;
+}
+
+.form.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.input-group {
+  margin-bottom: 18px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px;
+  background: var(--input);
+  border: 1px solid #3a3a5a;
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.1);
+}
+
+.error {
+  color: var(--error);
+  font-size: 13px;
+  margin-top: 5px;
+  display: none;
+}
+
+.success {
+  color: var(--success);
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 15px;
+  display: none;
+}
+
+button.submit {
+  width: 100%;
+  padding: 14px;
+  background: var(--gradient);
+  border: none;
+  border-radius: 10px;
+  color: #000;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button.submit:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.logged-in {
+  text-align: center;
+}
+
+.logged-in h2 {
+  margin-bottom: 10px;
+}
+
+.logged-in p {
+  color: var(--muted);
+  margin-bottom: 25px;
+}
+
+.logout-btn {
+  background: var(--error);
+  color: #fff;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Tabs -->
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-form="signup">Sign Up</button>
+    <button class="tab" data-form="login">Sign In</button>
+  </div>
+
+  <!-- Forms -->
+  <div class="form-container">
+
+    <!-- Signup Form -->
+    <form id="signup" class="form active">
+      <h2>Create Account</h2>
+      <div class="success" id="signupSuccess"></div>
+
+      <div class="input-group">
+        <label>Full Name</label>
+        <input type="text" id="signupName" placeholder="John Doe">
+        <div class="error" id="signupNameError"></div>
+      </div>
+
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" id="signupEmail" placeholder="john@example.com">
+        <div class="error" id="signupEmailError"></div>
+      </div>
+
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="signupPassword" placeholder="Min 6 characters">
+        <div class="error" id="signupPassError"></div>
+      </div>
+
+      <div class="input-group">
+        <label>Confirm Password</label>
+        <input type="password" id="signupConfirm" placeholder="Repeat password">
+        <div class="error" id="signupConfirmError"></div>
+      </div>
+
+      <button type="submit" class="submit">Sign Up</button>
+    </form>
+
+    <!-- Login Form -->
+    <form id="login" class="form">
+      <h2>Welcome Back</h2>
+      <div class="success" id="loginSuccess"></div>
+
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="john@example.com">
+        <div class="error" id="loginEmailError"></div>
+      </div>
+
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter password">
+        <div class="error" id="loginPassError"></div>
+      </div>
+
+      <button type="submit" class="submit">Sign In</button>
+    </form>
+
+    <!-- Logged In View -->
+    <div id="loggedIn" class="form logged-in">
+      <h2>Welcome, <span id="userName"></span>!</h2>
+      <p>You are successfully logged in.</p>
+      <button class="submit logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ====== UTILITIES ======
+const $ = id => document.getElementById(id);
+
+function showError(id, msg) {
+  $(id).textContent = msg;
+  $(id).style.display = 'block';
+}
+
+function hideError(id) {
+  $(id).style.display = 'none';
+}
+
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+async function hashPassword(password) {
+  const msgBuffer = new TextEncoder().encode(password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// ====== TAB SWITCHING ======
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.form').forEach(f => f.classList.remove('active'));
+    tab.classList.add('active');
+    $(tab.dataset.form).classList.add('active');
+  });
+});
+
+// ====== SIGNUP ======
+$('signup').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const name = $('signupName').value.trim();
+  const email = $('signupEmail').value.trim();
+  const pass = $('signupPassword').value;
+  const confirmPass = $('signupConfirm').value;
+
+  // Reset errors
+  ['signupNameError', 'signupEmailError', 'signupPassError', 'signupConfirmError'].forEach(hideError);
+
+  let hasError = false;
+
+  if (!name || name.length < 3) {
+    showError('signupNameError', 'Name must be at least 3 characters');
+    hasError = true;
+  }
+
+  if (!validateEmail(email)) {
+    showError('signupEmailError', 'Enter a valid email');
+    hasError = true;
+  }
+
+  if (pass.length < 6) {
+    showError('signupPassError', 'Password must be at least 6 characters');
+    hasError = true;
+  }
+
+  if (pass!== confirmPass) {
+    showError('signupConfirmError', 'Passwords do not match');
+    hasError = true;
+  }
+
+  if (hasError) return;
+
+  let users = JSON.parse(localStorage.getItem('eduShareUsers') || '{}');
+
+  if (users[email]) {
+    showError('signupEmailError', 'Email already registered');
+    return;
+  }
+
+  const hashedPass = await hashPassword(pass);
+  users[email] = { name, password: hashedPass };
+  localStorage.setItem('eduShareUsers', JSON.stringify(users));
+  localStorage.setItem('eduShareCurrentUser', email);
+
+  $('signupSuccess').textContent = 'Account created successfully!';
+  $('signupSuccess').style.display = 'block';
+
+  setTimeout(() => showLoggedInView(name), 1200);
+});
+
+// ====== LOGIN ======
+$('login').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const email = $('loginEmail').value.trim();
+  const pass = $('loginPassword').value;
+
+  ['loginEmailError', 'loginPassError'].forEach(hideError);
+
+  let users = JSON.parse(localStorage.getItem('eduShareUsers') || '{}');
+
+  if (!users[email]) {
+    showError('loginEmailError', 'No account found with this email');
+    return;
+  }
+
+  const hashedPass = await hashPassword(pass);
+
+  if (users[email].password!== hashedPass) {
+    showError('loginPassError', 'Incorrect password');
+    return;
+  }
+
+  localStorage.setItem('eduShareCurrentUser', email);
+  $('loginSuccess').textContent = `Welcome back, ${users[email].name}!`;
+  $('loginSuccess').style.display = 'block';
+
+  setTimeout(() => showLoggedInView(users[email].name), 1000);
+});
+
+// ====== SESSION MANAGEMENT ======
+function showLoggedInView(name) {
+  document.getElementById('tabs').style.display = 'none';
+  document.querySelectorAll('.form').forEach(f => f.classList.remove('active'));
+  $('loggedIn').classList.add('active');
+  $('userName').textContent = name;
+}
+
+function logout() {
+  localStorage.removeItem('eduShareCurrentUser');
+  location.reload();
+}
+
+// Check if user is already logged in
+window.addEventListener('load', () => {
+  const currentUser = localStorage.getItem('eduShareCurrentUser');
+  if (currentUser) {
+    let users = JSON.parse(localStorage.getItem('eduShareUsers') || '{}');
+    if (users[currentUser]) {
+      showLoggedInView(users[currentUser].name);
+    }
+  }
+});
+</script>
+
+</body>
+</html>
